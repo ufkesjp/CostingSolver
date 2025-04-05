@@ -27,16 +27,16 @@ from scipy.optimize import nnls
 KIT_Comp = pd.read_excel('D:\Analytics\Improvement Ideas for Work\Cost_Updates.xlsx', sheet = 'Kit Composition')
 
 # read in the new prices to a separate dataframe - this source serves as the pricing library
-KIT_Pricing = pd.read_excel('D:\Analytics\Improvement Ideas for Work\Cost_Updates.xlsx', sheet = 'Kit Composition')
+KIT_Pricing = pd.read_excel('D:\Analytics\Improvement Ideas for Work\Cost_Updates.xlsx', sheet = 'Kit Prices')
 
 # This is 1-hot encoding the composition, where the quantity indicates whether or not the manufacturer wants the part to receive a portion of the kit price. .getdummies() is another option here.
 # The quantity determines the coefficient utilized in the systems of equations non-negative least squares solver. In this case, it's binary (1 or 0).
-basket = (KIT_Comp.groupby(['Parent Item', 'Child Item'])['Qty'].sum().unstack().reset_index().fillna(0).set_index('Parent Item)
+basket = (KIT_Comp.groupby(['kit_ID', 'part_ID'])['Qty'].sum().unstack().reset_index().fillna(0).set_index('Parent Item)
 
 basket.to_numpy()
 A = basket
 
-Price_List = KIT_Pricing ['rebuilt1UNKit'].to_numpy()
+Price_List = KIT_Pricing ['Cost'].to_numpy()
 Price_List = np.nan_to_num(Price_List)
 
 B = Price_List
@@ -47,11 +47,11 @@ solution = nnls(A,B)[0]
 # Creating a dictionary of new parts costs
 COM_List = basket.columns.values
 
-dict = {'Child Item': COM_List, 'Updated Cost': solution}
+dict = {'part_ID': COM_List, 'Updated Cost': solution}
 Updated_COM_Costs = pd.Dataframe(dict)
 
 # previewing this parts dictionary prior to writing it back to excel as a new sheet
-print(Updated_COM_Costs)
+print(Updated_Parts_Costs)
 
 # writing the dataframe back into excel - this will throw an error if there's already a sheet named 'Updated_COM_Costs'. This indicates that this work has already been completed.
 with pd.ExcelWriter(('D:\Analytics\Improvement Ideas for Work\Cost_Updates.xlsx', sheet = 'Kit Composition', mode = 'a') as writer:
