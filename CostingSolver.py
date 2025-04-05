@@ -31,7 +31,7 @@ KIT_Pricing = pd.read_excel('D:\Analytics\Improvement Ideas for Work\Cost_Update
 
 # This is 1-hot encoding the composition, where the quantity indicates whether or not the manufacturer wants the part to receive a portion of the kit price. .getdummies() is another option here.
 # The quantity determines the coefficient utilized in the systems of equations non-negative least squares solver. In this case, it's binary (1 or 0).
-basket = (KIT_Comp.groupby(['kit_ID', 'part_ID'])['Qty'].sum().unstack().reset_index().fillna(0).set_index('Parent Item)
+basket = (KIT_Comp.groupby(['kit_ID', 'part_ID'])['Qty'].sum().unstack().reset_index().fillna(0).set_index('kit_ID')
 
 basket.to_numpy()
 A = basket
