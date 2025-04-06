@@ -9,4 +9,4 @@ A manufacturer needs to determine the cost of individual parts that are purchase
 
 ## Objectives
 1. Determine the cost of each part after receiving updated kit pricing from the supplier.
-2. Minimize price variance (Purchase Price - Cost).
+2. Minimize price variance where price variance = purchase price - cost.
