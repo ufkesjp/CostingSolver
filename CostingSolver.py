@@ -1,26 +1,7 @@
-# ----------------------------------------
-#             Problem Statement
-# ----------------------------------------
-
-# In this scenario, a manufacturer needs to determine the cost of individual parts that it purchases in a kit.
-#     - The prices of the kit are updated periodically by the supplier. 
-#     - The prices of the individual parts are not provided by the supplier, but are necessary for the manufacturer to determine costs of production.
-#     - Some parts are used in more than one kit.
-#     - Some of the kits have all of the same parts, but are priced differently by the supplier due to slight configuration differences. In instances such as this, the goal is to cost in such a way that minimizes price variance (cost in the system - purchase price).
-#
-# Question that needs to be answered:
-#     What should the cost of each part be updated to after receiving the updated kit prices from the supplier?
-
-# ----------------------------------------
-#                Solution
-# ----------------------------------------
-
 import pandas as pd
 import numpy as np
 import scipy as sp
 from scipy.optimize import nnls
-
-# ------------------------------------- Updated ------------------------------------------------
 
 # to read in the composition of each kit, showing which parts are in which kit
 KIT_Comp = pd.read_excel('D:\Analytics\Improvement Ideas for Work\PartsCost_Updates.xlsx', sheet_name = 'Kit Composition')
@@ -55,7 +36,6 @@ print(Updated_Parts_Costs)
 # writing the dataframe back into excel - this will throw an error if there's already a sheet named 'Updated_COM_Costs'. This indicates that this work has already been completed.
 with pd.ExcelWriter('D:\Analytics\Improvement Ideas for Work\PartsCost_Updates.xlsx', mode = 'a') as writer:
     Updated_Parts_Costs.to_excel(writer, sheet_name = 'Updated_COM_Costs')
-
 
 # ------------------------------------------------------------------------
 #                        Enhancements to be made
