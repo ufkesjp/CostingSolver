@@ -12,12 +12,12 @@ A manufacturer needs to determine the cost of individual parts that are purchase
 2. Minimize price variance where price variance = purchase price - cost.
 
 ## Approach
-The pattern of this problem is akin to a systems of linear equations problem. By one hot encoding all of the parts in all of the kits and setting them equal to the kit price, you can get an equation that looks like the following for each kit:
+The pattern of this problem is akin to a systems of linear equations problem. By one-hot encoding all of the parts in all of the kits and setting them equal to the kit price, you can get an equation that looks like the following for each kit:
 
 #### Variables
-a = part_id1
-b = part_id2
-c = part_id3
+  - a = part_id1
+  - b = part_id2
+  - c = part_id3
 
 #### Equation 
 1a + 0b + 1c = target price
