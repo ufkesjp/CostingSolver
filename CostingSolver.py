@@ -25,15 +25,15 @@ B = Price_List
 solution = nnls(A,B)[0]
 
 # Creating a dictionary of new parts costs
-COM_List = basket.columns.values
+Parts_List = basket.columns.values
 
-dict = {'part_ID': COM_List, 'Updated Cost': solution}
+dict = {'part_ID': Parts_List, 'Updated Cost': solution}
 Updated_Parts_Costs = pd.DataFrame(dict)
 
 # previewing this parts dictionary prior to writing it back to excel as a new sheet
 print(Updated_Parts_Costs)
 
-# writing the dataframe back into excel - this will throw an error if there's already a sheet named 'Updated_COM_Costs'. This indicates that this work has already been completed.
+# writing the dataframe back into excel - this will throw an error if there's already a sheet named 'Updated_Parts_Costs'. This indicates that this work has already been completed.
 with pd.ExcelWriter("./PartsCost_Updates.xlsx", mode = 'a') as writer:
     Updated_Parts_Costs.to_excel(writer, sheet_name = 'Updated_Parts_Costs')
 
