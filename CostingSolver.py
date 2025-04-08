@@ -4,10 +4,10 @@ import scipy as sp
 from scipy.optimize import nnls
 
 # to read in the composition of each kit, showing which parts are in which kit
-KIT_Comp = pd.read_excel('D:\Analytics\Improvement Ideas for Work\PartsCost_Updates.xlsx', sheet_name = 'Kit Composition')
+KIT_Comp = pd.read_excel("./PartsCost_Updates.xlsx", sheet_name = 'Kit Composition')
 
 # read in the new prices to a separate dataframe - this source serves as the pricing library
-KIT_Pricing = pd.read_excel('D:\Analytics\Improvement Ideas for Work\PartsCost_Updates.xlsx', sheet_name = 'Kit Prices')
+KIT_Pricing = pd.read_excel("./PartsCost_Updates.xlsx", sheet_name = 'Kit Prices')
 
 # This is 1-hot encoding the composition, where the quantity indicates whether or not the manufacturer wants the part to receive a portion of the kit price. .getdummies() is another option here.
 # The quantity determines the coefficient utilized in the systems of equations non-negative least squares solver. In this case, it's binary (1 or 0).
@@ -34,8 +34,8 @@ Updated_Parts_Costs = pd.DataFrame(dict)
 print(Updated_Parts_Costs)
 
 # writing the dataframe back into excel - this will throw an error if there's already a sheet named 'Updated_COM_Costs'. This indicates that this work has already been completed.
-with pd.ExcelWriter('D:\Analytics\Improvement Ideas for Work\PartsCost_Updates.xlsx', mode = 'a') as writer:
-    Updated_Parts_Costs.to_excel(writer, sheet_name = 'Updated_COM_Costs')
+with pd.ExcelWriter("./PartsCost_Updates.xlsx", mode = 'a') as writer:
+    Updated_Parts_Costs.to_excel(writer, sheet_name = 'Updated_Parts_Costs')
 
 # ------------------------------------------------------------------------
 #                        Enhancements to be made
